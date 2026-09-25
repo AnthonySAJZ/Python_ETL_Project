@@ -7,6 +7,8 @@ tablas (`cliente` y `deuda`) y los guarda en el "servidor de salida"
 
 El enunciado oficial está en `Python_ETL_Project.pdf`.
 
+👉 **Guía paso a paso para ejecutarlo desde cero:** [GUIA_EJECUCION.md](GUIA_EJECUCION.md)
+
 ---
 
 ## 1. Requisitos
@@ -32,6 +34,7 @@ Python_ETL_Project/
 ├── main.py                  -> programa principal (EXTRACT, TRANSFORM, LOAD)
 ├── requirements.txt         -> librerías externas necesarias (pandas)
 ├── README.md                -> este documento
+├── GUIA_EJECUCION.md        -> guía paso a paso para ejecutar el proyecto
 ├── Python_ETL_Project.pdf   -> enunciado del proyecto
 │
 ├── server_inputs/           -> "servidor de entrada": aquí están los datos originales
