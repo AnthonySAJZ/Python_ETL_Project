@@ -13,7 +13,8 @@ El enunciado oficial está en `Python_ETL_Project.pdf`.
 
 ## 1. Requisitos
 
-- **Python 3.9 o superior** (probado con Python 3.11).
+- **Python 3.9 o superior** (probado con Python 3.11), **o** una cuenta de
+  Google para usar **Google Colab** (no requiere instalar nada).
 - La librería **pandas** (probado con pandas 2.3 y 3.0).
 
 `pathlib` y `sqlite3` ya vienen incluidos con Python, no hay que instalarlos.
@@ -32,6 +33,7 @@ python -m pip install -r requirements.txt
 Python_ETL_Project/
 │
 ├── main.py                  -> programa principal (EXTRACT, TRANSFORM, LOAD)
+├── main.ipynb               -> el mismo código en formato notebook (Google Colab)
 ├── requirements.txt         -> librerías externas necesarias (pandas)
 ├── README.md                -> este documento
 ├── GUIA_EJECUCION.md        -> guía paso a paso para ejecutar el proyecto
@@ -49,6 +51,7 @@ Python_ETL_Project/
 | Elemento | Para qué sirve |
 |---|---|
 | `main.py` | Contiene todo el proceso ETL, dividido con comentarios en EXTRACT, TRANSFORM y LOAD. |
+| `main.ipynb` | El mismo código de `main.py`, dividido en celdas, para ejecutarlo en Google Colab o Jupyter. |
 | `server_inputs` | Carpeta de entrada. Simula el servidor desde donde se leen los datos. |
 | `server_outputs` | Carpeta de salida. Simula el servidor donde se dejan los resultados. Si no existe, `main.py` la crea. |
 | `file.ope` | Archivo de texto con los datos. Las líneas que empiezan en `1` son clientes y las que empiezan en `2` son deudas. |
@@ -66,9 +69,21 @@ python main.py
 
 Las rutas se calculan a partir de la carpeta donde está `main.py`
 (`Path(__file__).resolve().parent`), por lo que el proyecto se puede copiar a
-otra computadora y ejecutar sin cambiar nada. El programa puede ejecutarse
-todas las veces que se quiera: los archivos de salida se reemplazan y no se
-duplican registros.
+otra computadora y ejecutar sin cambiar nada. En un notebook (Colab/Jupyter)
+no existe `__file__`, así que se usa la carpeta actual (`Path.cwd()`). El
+programa puede ejecutarse todas las veces que se quiera: los archivos de salida
+se reemplazan y no se duplican registros.
+
+### En Google Colab
+
+1. Abrir `main.ipynb` en Colab (menú **Archivo → Subir notebook**, o
+   **Archivo → Abrir notebook → GitHub** pegando la URL del repositorio).
+2. Menú **Entorno de ejecución → Ejecutar todas**.
+3. La primera celda (Paso 0) pide subir `file.ope` desde la computadora.
+4. La última celda descarga `cliente.csv`, `deuda.csv` y `deuda.db`.
+
+Colab ya trae pandas instalado. Los pasos detallados están en
+[GUIA_EJECUCION.md](GUIA_EJECUCION.md).
 
 Salida esperada (resumida):
 

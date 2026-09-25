@@ -1,9 +1,84 @@
 # Guía de ejecución paso a paso
 
-Esta guía explica cómo ejecutar el proyecto ETL en tu computadora desde cero,
-aunque nunca hayas ejecutado un programa de Python.
+Esta guía explica cómo ejecutar el proyecto ETL desde cero, aunque nunca hayas
+ejecutado un programa de Python. Hay dos formas:
+
+- **Parte A – Google Colab** (en el navegador, no hay que instalar nada).
+  Es el entorno que se usa en el curso.
+- **Parte B – En tu computadora** (con Python instalado).
+
+Las dos formas usan el mismo código y producen los mismos resultados.
 
 ---
+
+# PARTE A – Google Colab
+
+Para Colab se usa **`main.ipynb`**: tiene el mismo código que `main.py`,
+dividido en celdas (Paso 0, EXTRACT, TRANSFORM, LOAD). Colab ya trae pandas.
+
+### A.1 Tener a mano el archivo `file.ope`
+
+Colab te pedirá subirlo desde tu computadora. Si no lo tienes:
+en GitHub entra a la carpeta `server_inputs` → `file.ope` → botón
+**"Download raw file"** (ícono de descarga).
+
+### A.2 Abrir el notebook en Colab
+
+**Opción 1 – Enlace directo (la más fácil)**
+
+<https://colab.research.google.com/github/AnthonySAJZ/Python_ETL_Project/blob/proyecto-etl/main.ipynb>
+
+> Si el Pull Request ya fue unido (merge), cambia `proyecto-etl` por `main`
+> en el enlace.
+
+**Opción 2 – Subir el archivo**
+1. Descarga `main.ipynb` desde GitHub (o desde el ZIP del proyecto).
+2. Entra a <https://colab.research.google.com>.
+3. Menú **Archivo → Subir notebook** y elige `main.ipynb`.
+
+Para conservar el notebook en tu cuenta: **Archivo → Guardar una copia en
+Drive**.
+
+### A.3 Ejecutar
+
+1. Menú **Entorno de ejecución → Ejecutar todas**
+   (o ejecuta cada celda en orden con **Shift + Enter**).
+2. La celda **Paso 0** mostrará un botón **"Elegir archivos"**:
+   selecciona `file.ope`. El notebook lo guarda automáticamente en
+   `server_inputs/file.ope`.
+3. Las celdas EXTRACT, TRANSFORM y LOAD mostrarán las validaciones `[OK]` y
+   al final **ETL FINALIZADO CORRECTAMENTE**.
+4. Las celdas de vista previa muestran las 3 primeras filas de `cliente` y
+   `deuda`.
+
+### A.4 Ver y descargar los resultados
+
+- Haz clic en el ícono de **carpeta** 📁 (panel izquierdo de Colab) para ver
+  `server_inputs` y `server_outputs`.
+- La última celda descarga `cliente.csv`, `deuda.csv` y `deuda.db` a tu
+  computadora. Si el navegador pregunta, permite las descargas múltiples.
+
+> **Importante:** los archivos de Colab se **borran al cerrar la sesión**.
+> Descarga los resultados antes de salir. La próxima vez tendrás que volver a
+> subir `file.ope` (el Paso 0 lo pedirá de nuevo).
+
+### A.5 Alternativa: ejecutar `main.py` dentro de Colab
+
+Si prefieres ejecutar el archivo `main.py` tal cual, crea un notebook nuevo en
+Colab y ejecuta esta celda (descarga el proyecto completo desde GitHub,
+incluido `file.ope`):
+
+```python
+!git clone -b proyecto-etl https://github.com/AnthonySAJZ/Python_ETL_Project.git
+%cd Python_ETL_Project
+!python main.py
+```
+
+> Si el Pull Request ya fue unido, puedes quitar `-b proyecto-etl`.
+
+---
+
+# PARTE B – En tu computadora
 
 ## Paso 0. Lo que vas a necesitar
 
@@ -187,10 +262,18 @@ archivos de `server_outputs` y vuelve a ejecutar `python main.py`.
 | `VALIDACIÓN FALLIDA: Existe el archivo file.ope` | Falta `server_inputs/file.ope` o se renombró. | Asegúrate de que el archivo esté en `server_inputs` y se llame exactamente `file.ope`. |
 | `PermissionError` al guardar un CSV | El CSV está abierto en Excel (Windows lo bloquea). | Cierra el archivo en Excel y ejecuta de nuevo. |
 | Excel muestra los códigos sin ceros | Excel convierte el texto a número. | Es solo la vista de Excel; el CSV está correcto (Paso 5). |
+| Colab: `VALIDACIÓN FALLIDA: Existe el archivo file.ope` | No se subió `file.ope` (o la sesión se reinició). | Vuelve a ejecutar la celda **Paso 0** y sube el archivo. |
+| Colab: `NameError: name 'cliente' is not defined` | Se ejecutó una celda sin haber ejecutado las anteriores. | Usa **Entorno de ejecución → Ejecutar todas**. |
+| Colab: la celda de descarga no descarga nada | El navegador bloqueó las descargas múltiples. | Permite las descargas en el aviso del navegador, o descarga los archivos desde el panel 📁 (clic derecho → Descargar). |
 
 ---
 
-## Resumen rápido (para cuando ya está todo instalado)
+## Resumen rápido
+
+**Google Colab:** abrir `main.ipynb` → **Entorno de ejecución → Ejecutar
+todas** → subir `file.ope` → descargar resultados.
+
+**En tu computadora:**
 
 ```bash
 cd ruta/a/Python_ETL_Project

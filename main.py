@@ -6,6 +6,7 @@ y los guarda en la carpeta server_outputs (CSV + base de datos SQLite).
 
 Ejecución:
     python main.py
+    (en Google Colab también se puede usar main.ipynb)
 """
 
 from pathlib import Path
@@ -20,7 +21,12 @@ import pandas as pd
 
 # Carpeta donde está este archivo main.py. Todas las rutas se construyen a
 # partir de ella, así el proyecto funciona en cualquier computadora.
-CARPETA_PROYECTO = Path(__file__).resolve().parent
+# En un notebook (Google Colab / Jupyter) no existe __file__, por eso en ese
+# caso se usa la carpeta actual de trabajo.
+try:
+    CARPETA_PROYECTO = Path(__file__).resolve().parent
+except NameError:
+    CARPETA_PROYECTO = Path.cwd()
 
 CARPETA_ENTRADA = CARPETA_PROYECTO / "server_inputs"
 CARPETA_SALIDA = CARPETA_PROYECTO / "server_outputs"
