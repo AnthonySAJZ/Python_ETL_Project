@@ -11,6 +11,20 @@ El enunciado oficial está en `Python_ETL_Project.pdf`.
 👉 **Ejecutar en tu computadora:** [GUIA_EJECUCION.md](GUIA_EJECUCION.md)  
 👉 **Checklist de entregables y requisitos:** [CHECKLIST.md](CHECKLIST.md)
 
+### Entrega al profesor
+
+El profesor pide **un único archivo** `.py` o `.ipynb` con la nomenclatura
+`main_<nombre>_<ape_pat>`. El entregable es:
+
+- **`main_Anthony_Silva.ipynb`** (recomendado, porque el curso usa Google Colab), **o**
+- **`main_Anthony_Silva.py`** (el mismo código como script).
+
+Cada uno funciona **solo**: crea las carpetas `server_inputs` y
+`server_outputs`, toma `file.ope` (subido en Colab o colocado junto al
+archivo) y genera los resultados. La documentación y las observaciones van
+dentro del propio archivo. El resto de este repositorio (README, guías,
+resultados) es material de apoyo.
+
 ---
 
 ## 1. Requisitos
@@ -34,8 +48,8 @@ python -m pip install -r requirements.txt
 ```
 Python_ETL_Project/
 │
-├── main.py                  -> programa principal (EXTRACT, TRANSFORM, LOAD)
-├── main.ipynb               -> el mismo código en formato notebook (Google Colab)
+├── main_Anthony_Silva.py    -> programa principal (EXTRACT, TRANSFORM, LOAD)
+├── main_Anthony_Silva.ipynb -> el mismo código en formato notebook (Google Colab)
 ├── requirements.txt         -> librerías externas necesarias (pandas)
 ├── README.md                -> este documento
 ├── GUIA_COLAB.md            -> paso a paso para ejecutarlo en Google Colab
@@ -54,10 +68,10 @@ Python_ETL_Project/
 
 | Elemento | Para qué sirve |
 |---|---|
-| `main.py` | Contiene todo el proceso ETL, dividido con comentarios en EXTRACT, TRANSFORM y LOAD. |
-| `main.ipynb` | El mismo código de `main.py`, dividido en celdas, para ejecutarlo en Google Colab o Jupyter. |
-| `server_inputs` | Carpeta de entrada. Simula el servidor desde donde se leen los datos. |
-| `server_outputs` | Carpeta de salida. Simula el servidor donde se dejan los resultados. Si no existe, `main.py` la crea. |
+| `main_Anthony_Silva.py` | Contiene todo el proceso ETL, dividido con comentarios en EXTRACT, TRANSFORM y LOAD. |
+| `main_Anthony_Silva.ipynb` | El mismo código de `main_Anthony_Silva.py`, dividido en celdas, para ejecutarlo en Google Colab o Jupyter. |
+| `server_inputs` | Carpeta de entrada. Simula el servidor desde donde se leen los datos. Si no existe, el programa la crea. |
+| `server_outputs` | Carpeta de salida. Simula el servidor donde se dejan los resultados. Si no existe, `main_Anthony_Silva.py` la crea. |
 | `file.ope` | Archivo de texto con los datos. Las líneas que empiezan en `1` son clientes y las que empiezan en `2` son deudas. |
 | `cliente.csv` | Resultado: el DataFrame `cliente` (19 columnas). |
 | `deuda.csv` | Resultado: el DataFrame `deuda` (10 columnas). |
@@ -68,10 +82,16 @@ Python_ETL_Project/
 Desde la carpeta del proyecto:
 
 ```bash
-python main.py
+python main_Anthony_Silva.py
 ```
 
-Las rutas se calculan a partir de la carpeta donde está `main.py`
+Antes del EXTRACT, el programa **crea el ambiente**: genera las carpetas
+`server_inputs` y `server_outputs` si no existen y, si `file.ope` está junto
+al programa (y no dentro de `server_inputs`), lo copia al servidor de
+entrada. Por eso basta con tener `main_Anthony_Silva.py` y `file.ope` en la
+misma carpeta.
+
+Las rutas se calculan a partir de la carpeta donde está `main_Anthony_Silva.py`
 (`Path(__file__).resolve().parent`), por lo que el proyecto se puede copiar a
 otra computadora y ejecutar sin cambiar nada. En un notebook (Colab/Jupyter)
 no existe `__file__`, así que se usa la carpeta actual (`Path.cwd()`). El
@@ -80,7 +100,7 @@ se reemplazan y no se duplican registros.
 
 ### En Google Colab
 
-1. Abrir `main.ipynb` en Colab (menú **Archivo → Subir notebook**, o
+1. Abrir `main_Anthony_Silva.ipynb` en Colab (menú **Archivo → Subir notebook**, o
    **Archivo → Abrir notebook → GitHub** pegando la URL del repositorio).
 2. Menú **Entorno de ejecución → Ejecutar todas**.
 3. La primera celda (Paso 0) pide subir `file.ope` desde la computadora.
@@ -92,8 +112,10 @@ Colab ya trae pandas instalado. Los pasos detallados están en
 Salida esperada (resumida):
 
 ```
+CREAR AMBIENTE
+  Carpetas listas: server_inputs y server_outputs
 EXTRACT
-  [OK] Existe el archivo file.ope
+  [OK] Existe el archivo server_inputs/file.ope
   Total de líneas útiles leídas: 1001
   Registros de cliente (empiezan en 1): 139
   Registros de deuda (empiezan en 2): 861
@@ -197,7 +219,7 @@ deuda.to_sql("deuda", conexion, if_exists="replace", index=False)
 - Las columnas se guardan como `TEXT`, por lo que también conservan los
   ceros iniciales.
 
-## 8. Validaciones incluidas en `main.py`
+## 8. Validaciones incluidas en `main_Anthony_Silva.py`
 
 Cada validación muestra `[OK]` en la consola; si alguna falla, el programa se
 detiene con un mensaje claro.

@@ -1,15 +1,30 @@
 """
 Proyecto Final - Python for ETL
+Autor: Anthony Silva Jiménez
 
-Lee el archivo server_inputs/file.ope, genera dos DataFrames (cliente y deuda)
-y los guarda en la carpeta server_outputs (CSV + base de datos SQLite).
+Transfiere los datos desde el servidor de entrada (carpeta server_inputs) al
+servidor de salida (carpeta server_outputs):
+  - EXTRACT:   lee server_inputs/file.ope
+  - TRANSFORM: genera los DataFrames cliente y deuda
+  - LOAD:      guarda cliente.csv, deuda.csv y deuda.db (SQLite, bono)
 
 Ejecución:
-    python main.py
-    (en Google Colab también se puede usar main.ipynb)
+    1. Dejar file.ope en la misma carpeta que este archivo
+       (o dentro de una carpeta server_inputs).
+    2. python main_Anthony_Silva.py
+    El programa crea las carpetas server_inputs y server_outputs si no existen.
+
+Observaciones:
+  - El primer carácter de cada línea (1 o 2) solo indica el tipo de registro,
+    por eso se retira antes de obtener los campos.
+  - Los registros de deuda miden 54 caracteres (sin el "2"), pero el
+    enunciado solo define hasta el carácter 42: los 12 caracteres finales no
+    están especificados y no se usan.
+  - Todos los valores se manejan como texto para no perder ceros iniciales.
 """
 
 from pathlib import Path
+import shutil
 import sqlite3
 
 import pandas as pd
@@ -68,12 +83,32 @@ print(SEPARADOR)
 
 
 # ============================================================================
+# CREAR AMBIENTE: carpetas server_inputs y server_outputs
+# ============================================================================
+print("\nCREAR AMBIENTE")
+
+CARPETA_ENTRADA.mkdir(exist_ok=True)
+CARPETA_SALIDA.mkdir(exist_ok=True)
+print(f"  Carpetas listas: {CARPETA_ENTRADA.name} y {CARPETA_SALIDA.name}")
+
+# Si file.ope se dejó junto a este programa, se copia al servidor de entrada
+ARCHIVO_JUNTO_AL_PROGRAMA = CARPETA_PROYECTO / "file.ope"
+if not ARCHIVO_ENTRADA.exists() and ARCHIVO_JUNTO_AL_PROGRAMA.exists():
+    shutil.copy(ARCHIVO_JUNTO_AL_PROGRAMA, ARCHIVO_ENTRADA)
+    print("  file.ope copiado a la carpeta server_inputs")
+
+if not ARCHIVO_ENTRADA.exists():
+    print("  ATENCIÓN: no se encontró file.ope. Colócalo junto a este "
+          "programa o dentro de server_inputs y vuelve a ejecutar.")
+
+
+# ============================================================================
 # EXTRACT: leer los datos desde el servidor de entrada (server_inputs)
 # ============================================================================
 print("\nEXTRACT")
 
 # Validación 1: el archivo de entrada debe existir
-validar(ARCHIVO_ENTRADA.exists(), f"Existe el archivo {ARCHIVO_ENTRADA.name}")
+validar(ARCHIVO_ENTRADA.exists(), "Existe el archivo server_inputs/file.ope")
 
 # El archivo está codificado en UTF-8 (tiene letras como Ñ, Ó, Ú)
 with open(ARCHIVO_ENTRADA, encoding="utf-8") as archivo:
@@ -215,8 +250,6 @@ print(f"  Observación: los registros de deuda tienen hasta {longitud_maxima} ca
 # LOAD: guardar los DataFrames en el servidor de salida (server_outputs)
 # ============================================================================
 print("\nLOAD")
-
-CARPETA_SALIDA.mkdir(exist_ok=True)
 
 # Archivos CSV ("utf-8-sig" permite que Excel muestre bien las tildes y la Ñ)
 cliente.to_csv(ARCHIVO_CLIENTE_CSV, index=False, encoding="utf-8-sig")

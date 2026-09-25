@@ -13,14 +13,14 @@ Las dos formas usan el mismo código y producen los mismos resultados.
 
 # PARTE A – Google Colab
 
-Para Colab se usa **`main.ipynb`** (el mismo código que `main.py`, dividido en
+Para Colab se usa **`main_Anthony_Silva.ipynb`** (el mismo código que `main_Anthony_Silva.py`, dividido en
 celdas). Colab ya trae pandas instalado.
 
 Resumen:
 
 1. Descarga `server_inputs/file.ope` desde GitHub.
 2. Abre el notebook:
-   <https://colab.research.google.com/github/AnthonySAJZ/Python_ETL_Project/blob/proyecto-etl/main.ipynb>
+   <https://colab.research.google.com/github/AnthonySAJZ/Python_ETL_Project/blob/proyecto-etl/main_Anthony_Silva.ipynb>
 3. **Entorno de ejecución → Ejecutar todas**.
 4. En la celda **Paso 0**, pulsa **"Elegir archivos"** y sube `file.ope`.
 5. Revisa las validaciones `[OK]` y descarga los resultados con la última celda.
@@ -38,7 +38,7 @@ cómo presentarlo, está en [GUIA_COLAB.md](GUIA_COLAB.md).**
 |---|---|
 | **Python 3.9 o superior** | Es el lenguaje con el que está hecho el proyecto. |
 | **pandas** | Librería para crear los DataFrames. Se instala en el Paso 3. |
-| La carpeta del proyecto | Contiene `main.py`, `server_inputs/file.ope`, etc. |
+| La carpeta del proyecto | Contiene `main_Anthony_Silva.py`, `server_inputs/file.ope`, etc. |
 
 No necesitas instalar SQLite: viene incluido con Python.
 
@@ -83,7 +83,7 @@ git clone -b proyecto-etl https://github.com/AnthonySAJZ/Python_ETL_Project.git
 
 ### 2.2 Abrir una terminal dentro de la carpeta
 
-La carpeta correcta es la que contiene `main.py`.
+La carpeta correcta es la que contiene `main_Anthony_Silva.py`.
 
 - **Windows:** abre la carpeta en el Explorador de archivos, haz clic en la
   barra de direcciones, escribe `cmd` y pulsa Enter.
@@ -98,7 +98,7 @@ dir      # en Windows
 ls       # en Mac / Linux
 ```
 
-Debes ver `main.py`, `requirements.txt`, `server_inputs` y `server_outputs`.
+Debes ver `main_Anthony_Silva.py`, `requirements.txt`, `server_inputs` y `server_outputs`.
 
 ---
 
@@ -119,7 +119,7 @@ python -c "import pandas; print(pandas.__version__)"
 ## Paso 4. Ejecutar el ETL
 
 ```bash
-python main.py
+python main_Anthony_Silva.py
 ```
 
 ### Resultado esperado
@@ -129,8 +129,11 @@ python main.py
 PROYECTO ETL - file.ope
 ==================================================
 
+CREAR AMBIENTE
+  Carpetas listas: server_inputs y server_outputs
+
 EXTRACT
-  [OK] Existe el archivo file.ope
+  [OK] Existe el archivo server_inputs/file.ope
   Total de líneas útiles leídas: 1001
   Registros de cliente (empiezan en 1): 139
   Registros de deuda (empiezan en 2): 861
@@ -192,14 +195,14 @@ Instala **DB Browser for SQLite** (<https://sqlitebrowser.org/>), abre
 
 ## Paso 7. Volver a ejecutarlo
 
-Puedes ejecutar `python main.py` las veces que quieras:
+Puedes ejecutar `python main_Anthony_Silva.py` las veces que quieras:
 
 - los archivos CSV se sobrescriben;
 - la tabla SQLite se reemplaza (`if_exists="replace"`), así que **no se
   duplican registros**.
 
 Si quieres demostrar que el proceso genera todo desde cero, borra los tres
-archivos de `server_outputs` y vuelve a ejecutar `python main.py`.
+archivos de `server_outputs` y vuelve a ejecutar `python main_Anthony_Silva.py`.
 **No borres** `server_inputs/file.ope`, porque es el archivo de entrada.
 
 ---
@@ -210,11 +213,11 @@ archivos de `server_outputs` y vuelve a ejecutar `python main.py`.
 |---|---|---|
 | `'python' no se reconoce como un comando…` | Python no está en el PATH. | Usa `py` en lugar de `python`, o reinstala Python marcando "Add python.exe to PATH". |
 | `ModuleNotFoundError: No module named 'pandas'` | No se instalaron las dependencias. | Ejecuta el Paso 3. |
-| `can't open file '...main.py'` | La terminal no está en la carpeta del proyecto. | Repite el Paso 2.2. |
-| `VALIDACIÓN FALLIDA: Existe el archivo file.ope` | Falta `server_inputs/file.ope` o se renombró. | Asegúrate de que el archivo esté en `server_inputs` y se llame exactamente `file.ope`. |
+| `can't open file '...main_Anthony_Silva.py'` | La terminal no está en la carpeta del proyecto. | Repite el Paso 2.2. |
+| `VALIDACIÓN FALLIDA: Existe el archivo server_inputs/file.ope` | Falta `file.ope` o se renombró. | Coloca `file.ope` junto a `main_Anthony_Silva.py` (o dentro de `server_inputs`) con ese nombre exacto. |
 | `PermissionError` al guardar un CSV | El CSV está abierto en Excel (Windows lo bloquea). | Cierra el archivo en Excel y ejecuta de nuevo. |
 | Excel muestra los códigos sin ceros | Excel convierte el texto a número. | Es solo la vista de Excel; el CSV está correcto (Paso 5). |
-| Colab: `VALIDACIÓN FALLIDA: Existe el archivo file.ope` | No se subió `file.ope` (o la sesión se reinició). | Vuelve a ejecutar la celda **Paso 0** y sube el archivo. |
+| Colab: `VALIDACIÓN FALLIDA: Existe el archivo server_inputs/file.ope` | No se subió `file.ope` (o la sesión se reinició). | Vuelve a ejecutar la celda **Paso 0** y sube el archivo. |
 | Colab: `NameError: name 'cliente' is not defined` | Se ejecutó una celda sin haber ejecutado las anteriores. | Usa **Entorno de ejecución → Ejecutar todas**. |
 | Colab: la celda de descarga no descarga nada | El navegador bloqueó las descargas múltiples. | Permite las descargas en el aviso del navegador, o descarga los archivos desde el panel 📁 (clic derecho → Descargar). |
 
@@ -222,7 +225,7 @@ archivos de `server_outputs` y vuelve a ejecutar `python main.py`.
 
 ## Resumen rápido
 
-**Google Colab:** abrir `main.ipynb` → **Entorno de ejecución → Ejecutar
+**Google Colab:** abrir `main_Anthony_Silva.ipynb` → **Entorno de ejecución → Ejecutar
 todas** → subir `file.ope` → descargar resultados.
 
 **En tu computadora:**
@@ -230,5 +233,5 @@ todas** → subir `file.ope` → descargar resultados.
 ```bash
 cd ruta/a/Python_ETL_Project
 python -m pip install -r requirements.txt   # solo la primera vez
-python main.py
+python main_Anthony_Silva.py
 ```

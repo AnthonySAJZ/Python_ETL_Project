@@ -5,12 +5,23 @@ enunciado (`Python_ETL_Project.pdf`).
 
 ---
 
+## 0. Entrega al profesor
+
+| ✔ | Indicación del profesor | Cómo se cumple |
+|---|---|---|
+| [x] | Un **único archivo** `.py` o `.ipynb` | Se entrega **`main_Anthony_Silva.ipynb`** (o, alternativamente, `main_Anthony_Silva.py`). |
+| [x] | Nomenclatura `main_<nombre>_<ape_pat>` | `main_Anthony_Silva` (nombre: Anthony, apellido paterno: Silva). |
+| [x] | El archivo funciona por sí solo | Crea `server_inputs` y `server_outputs`, toma `file.ope` y genera todos los resultados. |
+| [x] | Documentación incluida | Descripción, instrucciones y observaciones dentro del archivo. |
+
+---
+
 ## 1. Entregables
 
 | ✔ | Archivo / carpeta | Descripción |
 |---|---|---|
-| [x] | `main.py` | Script ETL con las secciones **EXTRACT**, **TRANSFORM** y **LOAD** separadas por comentarios. |
-| [x] | `main.ipynb` | El mismo código en formato notebook, listo para **Google Colab**. |
+| [x] | `main_Anthony_Silva.py` | Script ETL con las secciones **EXTRACT**, **TRANSFORM** y **LOAD** separadas por comentarios. |
+| [x] | `main_Anthony_Silva.ipynb` | El mismo código en formato notebook, listo para **Google Colab**. |
 | [x] | `server_inputs/` | Carpeta de entrada ("servidor de entrada"). |
 | [x] | `server_inputs/file.ope` | Datos de entrada (idéntico al archivo original entregado). |
 | [x] | `server_outputs/` | Carpeta de salida ("servidor de salida"). |
@@ -31,10 +42,10 @@ enunciado (`Python_ETL_Project.pdf`).
 ### 2.1 Crear el ambiente – 2 puntos
 | ✔ | Requisito | Cómo se cumple |
 |---|---|---|
-| [x] | Carpeta `server_inputs` | Existe y contiene `file.ope`. |
-| [x] | Carpeta `server_outputs` | Existe y contiene los resultados (el código la crea si no existe). |
-| [x] | Archivo del proyecto `main.py` (o `main.ipynb`) | Se entregan **ambos**, con el mismo código. |
-| [x] | 3 partes separadas por comentarios: EXTRACT, TRANSFORM, LOAD | En `main.py` son bloques de comentario; en `main.ipynb` son celdas con título. |
+| [x] | Carpeta `server_inputs` | El programa la crea y deja allí `file.ope`. |
+| [x] | Carpeta `server_outputs` | El programa la crea y guarda allí los resultados. |
+| [x] | Archivo del proyecto (`main.py` o `main.ipynb` en el PDF; `main_<nombre>_<ape_pat>` según el profesor) | `main_Anthony_Silva.ipynb` / `main_Anthony_Silva.py`, con el mismo código. |
+| [x] | 3 partes separadas por comentarios: EXTRACT, TRANSFORM, LOAD | En `main_Anthony_Silva.py` son bloques de comentario; en `main_Anthony_Silva.ipynb` son celdas con título. |
 
 ### 2.2 EXTRACT – 2 puntos
 | ✔ | Requisito | Cómo se cumple |
@@ -97,7 +108,7 @@ SubCodigoCuenta, Condicion, Val_Saldo, Clasif_Deu, Cod_Cuenta`.
 | ✔ | Aspecto | Detalle |
 |---|---|---|
 | [x] | Rutas portables | Sin rutas absolutas; todo se construye desde la carpeta del proyecto. |
-| [x] | Compatible con Google Colab | `main.ipynb` sube `file.ope`, ejecuta el ETL y descarga los resultados. |
+| [x] | Compatible con Google Colab | `main_Anthony_Silva.ipynb` sube `file.ope`, ejecuta el ETL y descarga los resultados. |
 | [x] | Ceros iniciales conservados | Todo se maneja como texto: `0038518267` se mantiene así en DataFrames, CSV y SQLite. |
 | [x] | Reproducible | Se puede ejecutar varias veces: los CSV se sobrescriben y SQLite no duplica registros. |
 | [x] | Validaciones en el código | 10 validaciones que muestran `[OK]` (ver sección 4). |
@@ -127,11 +138,13 @@ SubCodigoCuenta, Condicion, Val_Saldo, Clasif_Deu, Cod_Cuenta`.
 
 | ✔ | Prueba | Resultado |
 |---|---|---|
-| [x] | `python main.py` con Python 3.11 + pandas 3.0 | Correcto |
-| [x] | `python main.py` con Python 3.12 + pandas 2.2.2 (versiones de Colab) | Correcto |
+| [x] | `python main_Anthony_Silva.py` con Python 3.11 + pandas 3.0 | Correcto |
+| [x] | `python main_Anthony_Silva.py` con Python 3.12 + pandas 2.2.2 (versiones de Colab) | Correcto |
 | [x] | Ejecutar desde otra carpeta y dos veces seguidas | Correcto, mismos resultados |
-| [x] | `main.ipynb` en un entorno que simula Colab (carpeta vacía + subida de `file.ope`) | Correcto; en la 2ª ejecución no vuelve a pedir el archivo |
-| [x] | Resultados de todas las ejecuciones | CSV idénticos byte a byte |
+| [x] | `main_Anthony_Silva.ipynb` en un entorno que simula Colab (carpeta vacía + subida de `file.ope`) | Correcto; en la 2ª ejecución no vuelve a pedir el archivo |
+| [x] | Resultados de todas las ejecuciones | Mismo contenido en todos los entornos |
+| [x] | Archivo único en una carpeta vacía (`.py` y `.ipynb`, con `file.ope` al lado o subido en Colab) | Crea las carpetas y genera los resultados correctos |
+| [x] | Archivo único **sin** `file.ope` | Se detiene con un mensaje claro indicando dónde colocarlo |
 | [x] | Comparación con un cálculo independiente desde `file.ope` | 139 clientes y 861 deudas idénticos |
 | [x] | Cada `Cod_SBS` de deuda existe en `cliente` | Correcto (confirma las posiciones) |
 | [x] | SQLite: tabla, columnas (TEXT) y filas iguales a `deuda.csv` | Correcto |
