@@ -7,15 +7,17 @@ tablas (`cliente` y `deuda`) y los guarda en el "servidor de salida"
 
 El enunciado oficial está en `Python_ETL_Project.pdf`.
 
-👉 **Guía paso a paso para ejecutarlo desde cero:** [GUIA_EJECUCION.md](GUIA_EJECUCION.md)
+👉 **Ejecutar en Google Colab (entorno del curso):** [GUIA_COLAB.md](GUIA_COLAB.md)  
+👉 **Ejecutar en tu computadora:** [GUIA_EJECUCION.md](GUIA_EJECUCION.md)  
+👉 **Checklist de entregables y requisitos:** [CHECKLIST.md](CHECKLIST.md)
 
 ---
 
 ## 1. Requisitos
 
-- **Python 3.9 o superior** (probado con Python 3.11), **o** una cuenta de
+- **Python 3.9 o superior** (probado con Python 3.11 y 3.12), **o** una cuenta de
   Google para usar **Google Colab** (no requiere instalar nada).
-- La librería **pandas** (probado con pandas 2.3 y 3.0).
+- La librería **pandas** (probado con pandas 2.2 —la versión de Colab—, 2.3 y 3.0).
 
 `pathlib` y `sqlite3` ya vienen incluidos con Python, no hay que instalarlos.
 
@@ -36,7 +38,9 @@ Python_ETL_Project/
 ├── main.ipynb               -> el mismo código en formato notebook (Google Colab)
 ├── requirements.txt         -> librerías externas necesarias (pandas)
 ├── README.md                -> este documento
-├── GUIA_EJECUCION.md        -> guía paso a paso para ejecutar el proyecto
+├── GUIA_COLAB.md            -> paso a paso para ejecutarlo en Google Colab
+├── GUIA_EJECUCION.md        -> guía para ejecutarlo en tu computadora
+├── CHECKLIST.md             -> checklist de entregables y requisitos del PDF
 ├── Python_ETL_Project.pdf   -> enunciado del proyecto
 │
 ├── server_inputs/           -> "servidor de entrada": aquí están los datos originales
@@ -83,7 +87,7 @@ se reemplazan y no se duplican registros.
 4. La última celda descarga `cliente.csv`, `deuda.csv` y `deuda.db`.
 
 Colab ya trae pandas instalado. Los pasos detallados están en
-[GUIA_EJECUCION.md](GUIA_EJECUCION.md).
+[GUIA_COLAB.md](GUIA_COLAB.md).
 
 Salida esperada (resumida):
 

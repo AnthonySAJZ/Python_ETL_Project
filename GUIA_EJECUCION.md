@@ -13,68 +13,20 @@ Las dos formas usan el mismo código y producen los mismos resultados.
 
 # PARTE A – Google Colab
 
-Para Colab se usa **`main.ipynb`**: tiene el mismo código que `main.py`,
-dividido en celdas (Paso 0, EXTRACT, TRANSFORM, LOAD). Colab ya trae pandas.
+Para Colab se usa **`main.ipynb`** (el mismo código que `main.py`, dividido en
+celdas). Colab ya trae pandas instalado.
 
-### A.1 Tener a mano el archivo `file.ope`
+Resumen:
 
-Colab te pedirá subirlo desde tu computadora. Si no lo tienes:
-en GitHub entra a la carpeta `server_inputs` → `file.ope` → botón
-**"Download raw file"** (ícono de descarga).
+1. Descarga `server_inputs/file.ope` desde GitHub.
+2. Abre el notebook:
+   <https://colab.research.google.com/github/AnthonySAJZ/Python_ETL_Project/blob/proyecto-etl/main.ipynb>
+3. **Entorno de ejecución → Ejecutar todas**.
+4. En la celda **Paso 0**, pulsa **"Elegir archivos"** y sube `file.ope`.
+5. Revisa las validaciones `[OK]` y descarga los resultados con la última celda.
 
-### A.2 Abrir el notebook en Colab
-
-**Opción 1 – Enlace directo (la más fácil)**
-
-<https://colab.research.google.com/github/AnthonySAJZ/Python_ETL_Project/blob/proyecto-etl/main.ipynb>
-
-> Si el Pull Request ya fue unido (merge), cambia `proyecto-etl` por `main`
-> en el enlace.
-
-**Opción 2 – Subir el archivo**
-1. Descarga `main.ipynb` desde GitHub (o desde el ZIP del proyecto).
-2. Entra a <https://colab.research.google.com>.
-3. Menú **Archivo → Subir notebook** y elige `main.ipynb`.
-
-Para conservar el notebook en tu cuenta: **Archivo → Guardar una copia en
-Drive**.
-
-### A.3 Ejecutar
-
-1. Menú **Entorno de ejecución → Ejecutar todas**
-   (o ejecuta cada celda en orden con **Shift + Enter**).
-2. La celda **Paso 0** mostrará un botón **"Elegir archivos"**:
-   selecciona `file.ope`. El notebook lo guarda automáticamente en
-   `server_inputs/file.ope`.
-3. Las celdas EXTRACT, TRANSFORM y LOAD mostrarán las validaciones `[OK]` y
-   al final **ETL FINALIZADO CORRECTAMENTE**.
-4. Las celdas de vista previa muestran las 3 primeras filas de `cliente` y
-   `deuda`.
-
-### A.4 Ver y descargar los resultados
-
-- Haz clic en el ícono de **carpeta** 📁 (panel izquierdo de Colab) para ver
-  `server_inputs` y `server_outputs`.
-- La última celda descarga `cliente.csv`, `deuda.csv` y `deuda.db` a tu
-  computadora. Si el navegador pregunta, permite las descargas múltiples.
-
-> **Importante:** los archivos de Colab se **borran al cerrar la sesión**.
-> Descarga los resultados antes de salir. La próxima vez tendrás que volver a
-> subir `file.ope` (el Paso 0 lo pedirá de nuevo).
-
-### A.5 Alternativa: ejecutar `main.py` dentro de Colab
-
-Si prefieres ejecutar el archivo `main.py` tal cual, crea un notebook nuevo en
-Colab y ejecuta esta celda (descarga el proyecto completo desde GitHub,
-incluido `file.ope`):
-
-```python
-!git clone -b proyecto-etl https://github.com/AnthonySAJZ/Python_ETL_Project.git
-%cd Python_ETL_Project
-!python main.py
-```
-
-> Si el Pull Request ya fue unido, puedes quitar `-b proyecto-etl`.
+👉 **El paso a paso completo, con lo que verás en cada celda y
+cómo presentarlo, está en [GUIA_COLAB.md](GUIA_COLAB.md).**
 
 ---
 
